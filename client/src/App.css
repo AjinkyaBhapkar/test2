@@ -1,0 +1,52 @@
+.all-cards{
+  display: grid;
+  gap:20px;
+  max-width: 80vw;
+  margin: 50px auto;
+  grid-template-columns: 25vw 25vw 25vw ;
+
+}
+
+
+
+.input-container{
+  margin: 50px 20px;
+  height: 35px;
+}
+.input{
+  padding: 5px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  display: block;
+  margin: 50px 10px;
+  width: 30%;
+  margin: auto;
+  font-style: italic;
+  font-weight: 100;
+  color: rgb(76, 76, 76);
+  
+}
+input[type=text]:focus{
+  border: 2px solid lightgray;
+  outline: none;
+
+}
+
+@media only screen and (max-width: 900px){
+  .all-cards{
+    grid-template-columns: 40vw 40vw;
+  }
+  .input{
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 600px){
+  .all-cards{
+    display: flex;
+    flex-direction: column;
+
+  }
+  .input{
+    width: 80%;
+  }
+}
