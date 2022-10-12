@@ -14,9 +14,12 @@ const Card = ({ data }) => {
             <img className='card-img' src={data.image} />
             <p>{data.description}</p>
             </a>
+            <div className='cta-container'>
+            <p>{data.company.name}</p>
             <button className='cta-btn'>
               {data.CTA} 
             </button>
+            </div>
         </div>
     )
 }

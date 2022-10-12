@@ -10,6 +10,7 @@ router.route('/').get((req,res)=>{
 router.route('/add').post((req,res)=>{
     const newCompany = new Company(req.body)
 
+    
     newCompany.save()
     .then(()=>{
         res.json('Company added successfully!')

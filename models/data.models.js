@@ -2,7 +2,8 @@ const mongoose = require ('mongoose')
 const Schema = mongoose.Schema
 
 const dataSchema = new Schema({
-    companyId:{type:Number,},
+    companyId:{type: mongoose.Types.ObjectId, ref:"company"},
+    // companyId:{type: Number},
     primaryText:{type:String,},
     headline:{type:String,},
     description:{type:String,},

@@ -19,6 +19,8 @@ body{
     justify-content: space-between;
     align-items: center;
     text-align: center;
+    font-size: 0.8rem;
+    font-weight: 400;
 }
 
 .card-img{
@@ -29,11 +31,28 @@ body{
     object-position: center;
     
 }
+.cta-container{
+    height: 35px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.cta-container>p{
+    font-style: italic;
+    color: gray;
+    font-weight: 500;
+
+}
 .cta-btn{
     margin: 15px;
     width: 50%;
     height: 20px;
     border: 0.5px solid lightgray;
+    background-color: rgb(127, 236, 255);
+    padding: 3px;
+    border-radius: 5px;
     box-shadow: 1px 2px 5px 1px rgb(220, 217, 217);
 }
 .cta-btn:hover{

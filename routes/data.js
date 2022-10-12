@@ -1,54 +1,56 @@
 const router = require('express').Router()
 let Data = require('../models/data.models')
-let Company = require('../models/companies.model')
 
 
+router.route('/search=:a').get(async (req, res) => {
+    const queryRegex = new RegExp(req.params.a, "i")
+   Data.aggregate([
 
-router.route('/search=:a').get((req, res) => {
-    Data.aggregate([
         {
-            $lookup: {
+            "$lookup": {
                 from: "companies",
                 localField: "companyId",
-                foreignField: "companyId",
+                foreignField: "_id",
                 as: "company"
             }
         }, {
             "$unwind": "$company"
-        }, {
+        },
+        {
             "$project": {
-                "company._id": 0,
-                "company.companyId": 0,
+                _id:1,
+                companyId:1,
+                "company.name":1,
+                "company.url":1,
+                primaryText:1,
+                headline:1,
+                description:1,
+                image:1,
+                CTA:1,
+                
+            },
+        },
+
+        {
+            $match: {
+                $or:
+                    [
+                        { "companyId.name": queryRegex },
+                        { "primaryText": queryRegex },
+                        { "headline": queryRegex },
+                        { "description": queryRegex }
+                    ]
             }
         }
+
     ])
-        .then(d => {
-            res.json(d.filter((a) =>
-                String(a.company.name).toLowerCase().includes(req.params.a) ||
-                String(a.primaryText).toLowerCase().includes(req.params.a) ||
-                String(a.headline).toLowerCase().includes(req.params.a) ||
-                String(a.description).toLowerCase().includes(req.params.a)
-            ))
+    .then(rslt=>{
 
-        })
+        res.json(rslt)
+    })
+    
 })
 
 
-router.route('/all').get((req, res) => {
-    Data.find()
-        .then(ad => res.json(ad))
-        .catch(err => console.log(err))
-})
-
-router.route('/add').post((req, res) => {
-    const newData = new Data(req.body)
-
-    newData.save()
-        .then(() => {
-            res.json('Data added successfully!')
-
-        })
-        .catch(err => res.json(err))
-})
 
 module.exports = router
